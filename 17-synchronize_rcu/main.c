@@ -35,6 +35,7 @@ static void threads_lock_init(void)
 struct our_data{
   int count1;
   int count2;
+  struct rcu_head rhead;
 };
 
 static struct our_data my_data; 
@@ -54,6 +55,14 @@ static void reader_do(void)
   rcu_read_unlock(); 
 }
 
+static void  rcu_free(struct rcu_head *head)
+{
+  struct our_data *data;
+  
+  data = container_of(head,struct our_data,rhead); 
+  kfree(data);
+}
+
 static void writer_do(void)
 {
  struct our_data *data, *tmp = pmy_data;
@@ -69,8 +78,9 @@ static void writer_do(void)
  rcu_assign_pointer(pmy_data,data);
  
  if (tmp != &my_data){
-   synchronize_rcu();
-   kfree(tmp);  
+   call_rcu(&tmp->rhead,rcu_free);
+   //synchronize_rcu();
+   //kfree(tmp);  
   }
 }
 
