@@ -1,0 +1,1 @@
+cmd_/root/mengxiao/eric/module_1/tmain.ko := ld -r -m elf_x86_64 -T /usr/src/kernels/3.10.0-327.el7.x86_64/scripts/module-common.lds --build-id  -o /root/mengxiao/eric/module_1/tmain.ko /root/mengxiao/eric/module_1/tmain.o /root/mengxiao/eric/module_1/tmain.mod.o

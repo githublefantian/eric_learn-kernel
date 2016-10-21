@@ -1,0 +1,1 @@
+cmd_/root/mengxiao/eric/module_1/tmain.o := ld -m elf_x86_64   -r -o /root/mengxiao/eric/module_1/tmain.o /root/mengxiao/eric/module_1/main.o /root/mengxiao/eric/module_1/src/other.o ; scripts/mod/modpost /root/mengxiao/eric/module_1/tmain.o
